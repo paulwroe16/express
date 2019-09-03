@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const messageSchema = new mongoose.Schema({
   _id: String,
-  place_id: String,
+  placeId: String,
   text: String,
   createdAt: Date,
   user: {

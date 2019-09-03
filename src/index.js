@@ -1,11 +1,17 @@
+//	Models
 require('./models/User');
 require('./models/Message');
+require('./models/Place');
+require('./models/SavedPlace');
 
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+
 const authRoutes = require('./routes/authRoutes');
 const messageRoutes = require('./routes/messageRoutes');
+const placeRoutes = require('./routes/placeRoutes');
+
 const requireAuth = require('./middlewares/requireAuth');
 
 const app = express();
@@ -13,6 +19,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(authRoutes);
 app.use(messageRoutes);
+app.use(placeRoutes);
 
 const mongoUri = 'mongodb+srv://administrator:iymi7zZWDGaUxxE7@tracks-8u6ch.mongodb.net/test?retryWrites=true&w=majority';
 if (!mongoUri) {

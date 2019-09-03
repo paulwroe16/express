@@ -9,13 +9,22 @@ const router = express.Router();
 router.use(requireAuth);
 
 router.get('/messages/:placeId', async (req, res) => {
-  try {
+ 
+ try {
+
     const { placeId } = req.params;
-    const messages = await Message.find({place_id: placeId});
+    console.log(placeId);
+    
+    const messages = await Message.find({placeId: placeId});
+
     res.send(messages);
+
   } catch(err) {
+
     console.log('error=======',err.message);
+    
   }
+
 });
 
 router.post('/send', async (req, res) => {
@@ -26,7 +35,7 @@ router.post('/send', async (req, res) => {
   myMessage.user.name = 'Other uSER';
 
   try {
-
+    console.log(myMessage);
     const message = new Message(myMessage);
     await message.save();
     res.send(message);

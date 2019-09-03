@@ -30,6 +30,10 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true
+  },
+  place_id: {
+    type: String,
+    required: false
   }
 });
 
