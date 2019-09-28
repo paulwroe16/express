@@ -99,6 +99,8 @@ router.post('/checkIn', async (req, res) => {
 
   const { userId, placeId } = req.body;
   
+  console.log('api: checking into: ', placeId);
+
   if (!userId || !placeId) {
     return res
       .status(500)
