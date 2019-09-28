@@ -10,20 +10,27 @@ const router = express.Router();
 
 router.use(requireAuth);
 
-router.get('/users/:placeId', async (req, res) => {
+/*
+  GET getPlaceUsers
+  args: placeId
+*/
+router.post('/users', async (req, res) => {
 
   try {
 
-    const { placeId } = req.params;
+    const { placeId } = req.body;
+
     const User = mongoose.model('User');
 
     let users;
     if (placeId) {
-      users = await User.find({ place_id: placeId });
+      users = await User.find({ placeId: placeId });
     } else {
       users = await User.find();
     }
-    console.log('users ==============================', users);
+
+    console.log(users);
+
     res.send(users);
 
   } catch (error) {
@@ -90,15 +97,15 @@ router.post('/checkIn', async (req, res) => {
 
   const User = mongoose.model('User');
 
-  const { user_id, placeId } = req.body;
+  const { userId, placeId } = req.body;
   
-  if (!user_id || !placeId) {
+  if (!userId || !placeId) {
     return res
       .status(500)
       .send({ error: 'You must provide a userId and placeId' });
   }
 
-  User.findOneAndUpdate({_id: user_id}, { place_id:placeId }, { upsert: false }, function(err, doc) {
+  User.findOneAndUpdate({_id: userId}, { placeId: placeId }, { upsert: false }, function(err, doc) {
     if (err) {
       console.log('error', err);
       return res.send(500, { error: err });

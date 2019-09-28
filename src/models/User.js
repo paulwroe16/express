@@ -2,6 +2,9 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema({
+  _id: {
+    type: mongoose.Schema.Types.ObjectId,
+  },
   forename: {
     type: String,
     unique: false,
@@ -31,7 +34,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  place_id: {
+  placeId: {
     type: String,
     required: false
   }

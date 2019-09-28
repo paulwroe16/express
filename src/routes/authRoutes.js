@@ -39,7 +39,7 @@ router.post('/signin', async (req, res) => {
     
     res.json({
       token: token,
-      user_id: user._id
+      userId: user._id
     });
 
     //res.send({token});
