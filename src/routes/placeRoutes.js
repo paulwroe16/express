@@ -97,17 +97,15 @@ router.post('/checkIn', async (req, res) => {
 
   const User = mongoose.model('User');
 
+  console.log('req.body', req.body);
+
   const { userId, placeId } = req.body;
-  
-  console.log('api: checking into: ', placeId);
 
   if (!userId || !placeId) {
-    return res
-      .status(500)
-      .send({ error: 'You must provide a userId and placeId' });
+    return res.status(500).send({ error: 'You must provide a userId and placeId' });
   }
 
-  User.findOneAndUpdate({_id: userId}, { placeId: placeId }, { upsert: false }, function(err, doc) {
+  User.findOneAndUpdate({ _id: userId }, { placeId: placeId }, { upsert: false }, function(err, doc) {
     if (err) {
       console.log('error', err);
       return res.send(500, { error: err });
